@@ -35,16 +35,15 @@ if(count($_POST)>0){
 		echo 'Users file does not exist<br>';
 	} else {
 		// 5. check if the email has been banned
-		$file_array = file($file_banned);
+		$file_array = array_map('str_getcsv', file($file_banned));
 		foreach($file_array as $array_record) {
-			if ($array_record == $_POST['email']) {
+			if ($array_record[0]  == $_POST['email']) {
 				echo 'This email has been banned. Please try another.<br>';
-				break;
 			} 
 		} 
-		//call signin method with values of form fields
-		signin($_POST['email'], $_POST['password']);
 	}
+	//call signin method with values of form fields
+	signin($_POST['email'], $_POST['password']);
 }
 
 
