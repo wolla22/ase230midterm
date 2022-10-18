@@ -25,7 +25,9 @@
         <?php foreach($authors_array as $key => $author) {
             if ($key == $quote[0]) {?>
                 <a href="quotes/detail.php?index=<?= $quote_key ?>"><p><?php echo $quote[1] . " - " . $author[0] . " " . $author[1] . "\n"; ?></p></a>
-            <?php } ?>
+            <?php } else {
+                error_reporting(0);   
+            }?>
         <?php } ?>  
     <?php } ?> 
     <?php 
