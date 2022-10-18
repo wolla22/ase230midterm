@@ -54,6 +54,5 @@
     else {
         $record = $_POST['quote'];
         modifyFile($quote_file, $record, $_POST['index'], $_POST['authors']);
-        print_r($_POST);
     }?>
 </body>
