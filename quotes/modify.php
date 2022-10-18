@@ -11,18 +11,16 @@
 </head>
 <body>
     <?php
-        //import and include resources needed for functions and file manipulation
         include('../csv_util.php');
         $author_file = '../csv/authors.csv';
         $quote_file = '../csv/quotes.csv';
-        //create arrays of quote and author information
         $authors_array = csvReturnArray($author_file);
         $quote_array = csvReturnArray($quote_file);
         $record;
         $quote;
         $author;
     ?>
-    <?php //if form has not been submitted, display form fields with information relavant to the value of $_GET['index']
+    <?php 
     if (!$_POST) { 
         foreach($quote_array as $quote_key => $csvquote) {
             if ($quote_key == $_GET['index']) {
@@ -37,16 +35,25 @@
         <form method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
             <label for="fname">Quote:</label>
             <input type="text" name="quote" value="<?php print($quote) ?>"><br><br>
-            <p><?php print($author) ?></p>
+            <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+            <select name="authors">
+                <?php foreach($authors_array as $key => $name) {
+                    $author_name = $name[0] . " " . $name[1];?>
+                    <?php if ($author_name == $author) {?>
+                        <option name="author" value="<?php echo $key; ?>" selected><?php echo $author_name ?></option>
+                    <?php } else { ?>
+                    <option name="author" value="<?php echo $key; ?>"><?php echo $author_name ?></option>
+                    <?php } 
+                } ?>
+            </select>
             <br><br>
             <input type="hidden" name="index" value="<?php echo $_GET['index']?>">
             <input type="submit" value="Submit">
         </form>
-    <?php }     
-    //if form has been submitted, modify relavant data with information from form fields.
+    <?php } 
     else {
         $record = $_POST['quote'];
-        modifyFile($quote_file, $record, $_POST['index']); ?>
-        <a href="../index.php"><button type="button" >Quote Index</button></a>
-   <?php } ?>
+        modifyFile($quote_file, $record, $_POST['index'], $_POST['authors']);
+        print_r($_POST);
+    }?>
 </body>
