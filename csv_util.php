@@ -132,7 +132,7 @@
         //for each entry in the array of file contents
         foreach($file_array as $key => $array_record) {
             //if the value of index of the record equals the specified line, change the data to empty string values
-            if ($key == $line) {
+            if ($array_record[0] == $line) {
                 //deleteAuthor($authors_file, $line);
                 array_push($write_array, array("", ""));
             
