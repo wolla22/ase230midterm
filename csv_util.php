@@ -70,9 +70,9 @@
         $file_array = csvReturnArray($file);
         $write_array = array();
         //search an array of the file's contents to find the specified line
-        foreach($file_array as $array_record) {
+        foreach($file_array as $key => $array_record) {
             //if the value of the first index in a line equals the specified line replace its contents with the modified data
-            if ($array_record[0] == $line) {
+            if ($key == $line) {
                 array_push($write_array, array($author_index, $record));
             } 
             //for each other entry in the array of the file's contents input the original data            
@@ -130,9 +130,9 @@
         $file_array = csvReturnArray($file);
         $write_array = array();
         //for each entry in the array of file contents
-        foreach($file_array as $array_record) {
+        foreach($file_array as $key => $array_record) {
             //if the value of index of the record equals the specified line, change the data to empty string values
-            if ($array_record[0] == $line) {
+            if ($key == $line) {
                 //deleteAuthor($authors_file, $line);
                 array_push($write_array, array("", ""));
             
