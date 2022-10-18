@@ -64,7 +64,7 @@
         fclose($file_open);
     }
 
-    function modifyFile(&$file, &$record, &$line) {
+    function modifyFile(&$file, &$record, &$line, &$author_index) {
         $file_modify = $file;
         $file_open = fopen($file_modify, "r+" );
         $file_array = csvReturnArray($file);
@@ -73,7 +73,7 @@
         foreach($file_array as $array_record) {
             //if the value of the first index in a line equals the specified line replace its contents with the modified data
             if ($array_record[0] == $line) {
-                array_push($write_array, array($line, $record));
+                array_push($write_array, array($author_index, $record));
             } 
             //for each other entry in the array of the file's contents input the original data            
             else {
